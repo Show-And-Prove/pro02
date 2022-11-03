@@ -20,7 +20,7 @@
 %>
 <div class="content container" id="content">
 	<h2 class="title">작성</h2>
-	<form name="frm1" id="frm1" action="../InsertBoardProCtrl" method="post">
+	<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/InsertBoardProCtrl" method="post">
 	<table class="table">
 		<tbody>
 			<tr>
@@ -40,7 +40,7 @@
 	<div class="btn-group">
 		<input type="submit" class="btn btn-danger" value="작성">
 		<input type="reset" class="btn btn-danger" value="취소">
-		<a href="../GetBoardListCtrl" class="btn btn-danger">목록으로</a>
+		<a href="<%=request.getContextPath() %>/GetBoardListCtrl" class="btn btn-danger">목록으로</a>
 	</div>
 	</form>
 </div>

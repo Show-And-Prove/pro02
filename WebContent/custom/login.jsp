@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 목록</title>
+<title>로그인</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -15,34 +15,26 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<%
-	List<Notice> notiList = (ArrayList<Notice>) request.getAttribute("notiList");	//fowarding된 데이터 받아오기
-%>
-<div class="content container">
-	<h2 class="title">공지사항 목록</h2>
+<div class="content container" id="content">
+	<h2 class="title">로그인</h2>
+	<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/MemberLoginCtrl" method="post">
 	<table class="table">
-		<thead>
-			<tr>
-				<th>글번</th><th>제목</th><th>작성일</th>
-			</tr>
-		</thead>
 		<tbody>
-		<% for(int i=0;i<notiList.size();i++){
-			Notice vo = notiList.get(i);
-		%>
-		<tr>
-			<td><%=notiList.size()-i %></td>
-			<td><a href="GetBoardDetailCtrl?no=<%=vo.getNo() %>"><%=vo.getTitle() %></a></td>
-			<td><%=vo.getResDate() %></td>
-		</tr>
-		<% 
-		}
-		%>	
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" name="cusId" id="cusId" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><input type="password" name="cusPw" id="cusPw" class="form-control" required></td>
+			</tr>
 		</tbody>
 	</table>
 	<div class="btn-group">
-		<a href="<%=request.getContextPath() %>/insertBoard.jsp" class="btn btn-danger">글쓰기</a>
+		<input type="submit" class="btn btn-danger" value="로그인">
+		<input type="reset" class="btn btn-danger" value="취소">
 	</div>
+	</form>
 </div>
 </body>
 </html>

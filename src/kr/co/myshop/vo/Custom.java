@@ -2,46 +2,51 @@ package kr.co.myshop.vo;
 
 public class Custom {
 	
-	private String customerId;	//고객 아이디
-	private String customerPw;	//고객 비밀번호
-	private String customerName;	//고객 이름
-	private String customerTel;		//고객 전화번호
-	private String customerAddress;		//고객 주소
+	private String cusId;	//고객 아이디
+	private String cusPw;	//고객 비밀번호
+	private String cusName;	//고객 이름
+	private String cusTel;		//고객 전화번호
+	private String address;		//고객 주소
+	private String tel;
 	private String regDate;		//가입일
 	private int point;		//포인트
 	private int level;		//등급
 	private int visited;	//방문횟수
-	
-	
-	public String getCustomerId() {
-		return customerId;
+	public String getCusId() {
+		return cusId;
 	}
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setCusId(String cusId) {
+		this.cusId = cusId;
 	}
-	public String getCustomerPw() {
-		return customerPw;
+	public String getCusPw() {
+		return cusPw;
 	}
-	public void setCustomerPw(String customerPw) {
-		this.customerPw = customerPw;
+	public void setCusPw(String cusPw) {
+		this.cusPw = cusPw;
 	}
-	public String getCustomerName() {
-		return customerName;
+	public String getCusName() {
+		return cusName;
 	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setCusName(String cusName) {
+		this.cusName = cusName;
 	}
-	public String getCustomerTel() {
-		return customerTel;
+	public String getCusTel() {
+		return cusTel;
 	}
-	public void setCustomerTel(String customerTel) {
-		this.customerTel = customerTel;
+	public void setCusTel(String cusTel) {
+		this.cusTel = cusTel;
 	}
-	public String getCustomerAddress() {
-		return customerAddress;
+	public String getAddress() {
+		return address;
 	}
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	public String getRegDate() {
 		return regDate;
@@ -67,5 +72,8 @@ public class Custom {
 	public void setVisited(int visited) {
 		this.visited = visited;
 	}
+	
+	
+	
 	
 }

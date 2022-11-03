@@ -1,17 +1,20 @@
 create database myshop1;
 commit;
 
+
 use myshop1;
 
 create table custom(
-	customerid varchar(20) primary key,
-    customerpw varchar(20) not null,
-    customername varchar(20) not null,
-    customertel varchar(30) not null,
-    customeraddress varchar(100) not null,
-    regdate datetime default now(),
-    point int default 0,
-    visited int default 0);
+	cusId varchar(20) primary key,	
+	cusPw varchar(200) not null,
+	cusName varchar(50) not null,
+	address varchar(500) not null,
+	tel varchar(14) not null,
+	regDate datetime default now(),
+	point int default 0,
+	level int default 0,
+	visited int default 0
+);
     
     
 create table notice(
