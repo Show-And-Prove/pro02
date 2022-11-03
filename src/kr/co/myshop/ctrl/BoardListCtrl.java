@@ -2,6 +2,7 @@ package kr.co.myshop.ctrl;
 
 import java.io.IOException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.ServletException;
@@ -23,7 +24,7 @@ public class BoardListCtrl extends HttpServlet {
 	private final static String url = "jdbc:mysql://localhost:3306/myshop1";
 	private final static String dbid = "root";
 	private final static String dbpw = "a1234";
-	private final static String sql = "";
+	String sql = "";
 	
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -37,18 +38,23 @@ public class BoardListCtrl extends HttpServlet {
 		List<Notice> notiList = new ArrayList<Notice>();
 		try {
 			Class.forName(DRIVER);
-			//sql = "select * from notice";
+			sql = "select * from notice";
 			con = DriverManager.getConnection(url, dbid, dbpw);
-				
-				
-				
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Notice vo = new Notice();
+				vo.setNo(rs.getInt("no"));
+				vo.setTitle(rs.getString("title"));
+				vo.setContent(rs.getString("content"));
+				vo.setAuthor(rs.getString("author"));
+				vo.setResDate(rs.getString("resdate"));
+				notiList.add(vo);
+			}
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 	}
 
