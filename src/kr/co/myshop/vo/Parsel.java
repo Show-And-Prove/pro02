@@ -1,51 +1,59 @@
 package kr.co.myshop.vo;
 
-public class Parsel {
-
-	private int parselNo;		//배송코드
-	private String parselAddress;		//배송지
-	private String customerTel;			//회원전화번호
-	private String parselCompany;		//배송회사
-	private String parselTel;		//배송기사 전화번호
-	private int parselState;		//배송상태
-	
-	
-	public int getParselNo() {
-		return parselNo;
-	}
-	public void setParselNo(int parselNo) {
-		this.parselNo = parselNo;
-	}
-	public String getParselAddress() {
-		return parselAddress;
-	}
-	public void setParselAddress(String parselAddress) {
-		this.parselAddress = parselAddress;
-	}
-	public String getCustomerTel() {
-		return customerTel;
-	}
-	public void setCustomerTel(String customerTel) {
-		this.customerTel = customerTel;
-	}
-	public String getParselCompany() {
-		return parselCompany;
-	}
-	public void setParselCompany(String parselCompany) {
-		this.parselCompany = parselCompany;
-	}
-	public String getParselTel() {
-		return parselTel;
-	}
-	public void setParselTel(String parselTel) {
-		this.parselTel = parselTel;
-	}
-	public int getParselState() {
-		return parselState;
-	}
-	public void setParselState(int parselState) {
-		this.parselState = parselState;
-	}
-	
-	
+public class Parsel
+{
+    private int parselNo;
+    private String parselAddr;
+    private String cusTel;
+    private String parselCompany;
+    private String parselTel;
+    private int parselState;
+    
+    public int getParselNo() {
+        return this.parselNo;
+    }
+    
+    public void setParselNo(final int parselNo) {
+        this.parselNo = parselNo;
+    }
+    
+    public String getParselAddr() {
+        return this.parselAddr;
+    }
+    
+    public void setParselAddr(final String parselAddr) {
+        this.parselAddr = parselAddr;
+    }
+    
+    public String getCusTel() {
+        return this.cusTel;
+    }
+    
+    public void setCusTel(final String cusTel) {
+        this.cusTel = cusTel;
+    }
+    
+    public String getParselCompany() {
+        return this.parselCompany;
+    }
+    
+    public void setParselCompany(final String parselCompany) {
+        this.parselCompany = parselCompany;
+    }
+    
+    public String getParselTel() {
+        return this.parselTel;
+    }
+    
+    public void setParselTel(final String parselTel) {
+        this.parselTel = parselTel;
+    }
+    
+    public int getParselState() {
+        return this.parselState;
+    }
+    
+    public void setParselState(final int parselState) {
+        this.parselState = parselState;
+    }
 }

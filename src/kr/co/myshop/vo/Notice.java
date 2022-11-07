@@ -7,6 +7,15 @@ public class Notice {
 	private String content;		//내용
 	private String author;		//작성자
 	private String resDate;		//작성일
+	private int visited;
+	
+	
+	public int getVisited() {
+		return visited;
+	}
+	public void setVisited(int visited) {
+		this.visited = visited;
+	}
 	public int getNo() {
 		return no;
 	}

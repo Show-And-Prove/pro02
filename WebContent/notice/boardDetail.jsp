@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>공지사항 목록</title>
+<title>공지사항 내용</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -22,7 +22,7 @@
 	Notice vo = (Notice) request.getAttribute("notice");
 %>
 <div class="content container" id="content">
-	<h2 class="title">공지사항 목록</h2>
+	<h2 class="title">공지사항 내용</h2>
 	<table class="table">
 		<tbody>
 			<tr>
@@ -44,6 +44,10 @@
 			<tr>
 				<th>작성일시</th>
 				<td><%=vo.getResDate() %></td>
+			</tr>
+			<tr>
+				<th>방문횟수</th>
+				<td><%=vo.getVisited() %></td>
 			</tr>
 		</tbody>
 	</table>

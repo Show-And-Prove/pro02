@@ -2,20 +2,23 @@ package kr.co.myshop.vo;
 
 public class Category {
 	
-	private int categoryNo;		//카테고리번호
-	private String categoryName;	//카테고리명
+	private int cateNo;		//카테고리번호
+	private String cateName;	//카테고리명
 	
-	public int getCategoryNo() {
-		return categoryNo;
+	
+	public int getCateNo() {
+		return cateNo;
 	}
-	public void setCategoryNo(int categoryNo) {
-		this.categoryNo = categoryNo;
+	public void setCateNo(int cateNo) {
+		this.cateNo = cateNo;
 	}
-	public String getCategoryName() {
-		return categoryName;
+	public String getCateName() {
+		return cateName;
 	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
 	}
+	
+
 	
 }

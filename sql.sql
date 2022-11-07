@@ -15,7 +15,8 @@ create table custom(
 	level int default 0,
 	visited int default 0
 );
-    
+
+
     
 create table notice(
 	no int primary key auto_increment,
@@ -34,6 +35,7 @@ insert into notice(title,content,author) values ("테스트제목6","테스트�
 commit;
 
 select * from notice;
+select * from custom;
 
 
 

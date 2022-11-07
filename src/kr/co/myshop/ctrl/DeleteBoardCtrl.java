@@ -33,7 +33,7 @@ public class DeleteBoardCtrl extends HttpServlet {
 		try {
 			//데이터베이스 연결
 			Class.forName(DRIVER);
-			sql = "delete from notice where notino=?";
+			sql = "delete from notice where no=?";
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
