@@ -24,7 +24,7 @@
 	          Product
 	        </a>
 	        <div class="dropdown-menu">
-	          <a class="dropdown-item" href="#">cate1</a>
+	          <a class="dropdown-item" href="<%=request.getContextPath() %>/GetProductListCtrl">cate1</a>
 	          <a class="dropdown-item" href="#">cate2</a>
 	          <div class="dropdown-divider"></div>
 	          <a class="dropdown-item" href="#">cate3</a>
