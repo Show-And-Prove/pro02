@@ -14,12 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.myshop.vo.Notice;
-import kr.co.myshop.vo.Product;
+import kr.co.myshop.vo.Sales;
 
-@WebServlet("/GetProductListCtrl")
-public class GetProductListCtrl extends HttpServlet {
+@WebServlet("/GetMemberSalesInfoCtrl")
+public class GetMemberSalesInfoCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private final static String URL = "jdbc:mysql://localhost:3306/myshop1?serverTimezone=Asia/Seoul";
@@ -28,32 +29,35 @@ public class GetProductListCtrl extends HttpServlet {
 	String sql = "";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		try {
+			String sid = (String) session.getAttribute("sid");
+			
 			//데이터베이스 연결
 			Class.forName(DRIVER);
-			sql = "select * from product order by prono";
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
+			sql = "select * from sales where cusid=? order by saleno desc";
 			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sid);
 			ResultSet rs = pstmt.executeQuery();
 			
 			//결과를 데이터베이스로 부터 받아서 리스트로 저장
-			List<Product> proList = new ArrayList<Product>();
+			List<Sales> saleList = new ArrayList<Sales>();
 			while(rs.next()){
-				Product vo = new Product();
-				vo.setProNo(rs.getInt("prono"));
-				vo.setCateNo(rs.getInt("cateno"));
-				vo.setProName(rs.getString("proname"));
-				vo.setProSpec(rs.getString("prospec"));
-				vo.setOriPrice(rs.getInt("oriprice"));
-				vo.setDiscountRate(rs.getDouble("discountrate"));
-				vo.setProPic(rs.getString("propic"));
-				vo.setProPic(rs.getString("propic2"));
-				proList.add(vo);
+				Sales vo = new Sales();
+				vo.setSaleNo(rs.getInt("saleno"));
+				vo.setCusId(rs.getString("cusId"));
+				vo.setProNo(rs.getString("prono"));
+				vo.setAmount(rs.getInt("amount"));
+				vo.setSaleDate(rs.getString("saledate"));
+				vo.setParselNo(rs.getInt("parselno"));
+				vo.setSalePayNo(rs.getInt("salepayno"));
+				saleList.add(vo);
 			}
-			request.setAttribute("proList", proList);
+			request.setAttribute("saleList", saleList);
 			
-			//notice/boardList.jsp 에 포워딩
-			RequestDispatcher view = request.getRequestDispatcher("./product/productList.jsp");
+			///sales/saleList.jsp 에 포워딩
+			RequestDispatcher view = request.getRequestDispatcher("./sales/saleList.jsp");
 			view.forward(request, response);
 			
 			rs.close();

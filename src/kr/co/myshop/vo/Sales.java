@@ -1,31 +1,31 @@
 package kr.co.myshop.vo;
 
 public class Sales {
-
-	private int saleNo;		//판매번호
-	private String customerId;		//구매자 아이디
-	private String productNo;		//상품 번호
-	private int amount;		//수량
-	private String saleDate;		//판매날짜
-	private int parselNo;		//송장번호
-	private int salePayNo;		//결제번호
+	private int saleNo;	//(auto)판매번호
+	private String cusId;	//+고객아이디
+	private String proNo;	//+제품번호
+	private int amount;	//+판매수량
+	private String saleDate;//(default)판매일
+	private int parselNo;	//(*parsel)배송코드
+	private int salePayNo;	//(*payment)결제번호
+	private int parselState;
 	public int getSaleNo() {
 		return saleNo;
 	}
 	public void setSaleNo(int saleNo) {
 		this.saleNo = saleNo;
 	}
-	public String getCustomerId() {
-		return customerId;
+	public String getCusId() {
+		return cusId;
 	}
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setCusId(String cusId) {
+		this.cusId = cusId;
 	}
-	public String getProductNo() {
-		return productNo;
+	public String getProNo() {
+		return proNo;
 	}
-	public void setProductNo(String productNo) {
-		this.productNo = productNo;
+	public void setProNo(String proNo) {
+		this.proNo = proNo;
 	}
 	public int getAmount() {
 		return amount;
@@ -51,6 +51,10 @@ public class Sales {
 	public void setSalePayNo(int salePayNo) {
 		this.salePayNo = salePayNo;
 	}
-
-
+	public int getParselState() {
+		return parselState;
+	}
+	public void setParselState(int parselState) {
+		this.parselState = parselState;
+	}
 }

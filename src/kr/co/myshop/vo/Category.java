@@ -1,11 +1,8 @@
 package kr.co.myshop.vo;
-
+//상품 카테고리 클래스
 public class Category {
-	
-	private int cateNo;		//카테고리번호
-	private String cateName;	//카테고리명
-	
-	
+	private int cateNo;
+	private String cateName;
 	public int getCateNo() {
 		return cateNo;
 	}
@@ -18,7 +15,4 @@ public class Category {
 	public void setCateName(String cateName) {
 		this.cateName = cateName;
 	}
-	
-
-	
 }
