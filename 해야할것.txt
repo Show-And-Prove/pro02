@@ -1,0 +1,31 @@
+index
+
+product
+-List
+-Insert>>사진 2개 안올리면 Detail에서 사진 깨짐
+-Detail
+-Update
+-Delete
+
+board
+-List
+-Detail
+-Write
+-Update
+-Delete
+
+custom
+-info
+-idCheck
+-insert
+-login
+
+admin
+-index
+나머지 전부 x
+
+cart
+-List
+-ToSale
+
+
