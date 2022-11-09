@@ -1,7 +1,9 @@
 package kr.co.myshop.vo;
-//제품 클래스
-public class Product {
-	private int proNo;	//상품번호
+
+public class CartListVO {
+	private int cartNo;
+	private String cusId;
+	private int proNo;
 	private int cateNo;	//카테고리 분류
 	private String proName;	//상품명
 	private String proSpec;	//상품규격
@@ -11,6 +13,18 @@ public class Product {
 	private String proPic;	//상품이미지1
 	private String proPic2;	//상품이미지2
 	private int amount; 	//재고수량
+	public int getCartNo() {
+		return cartNo;
+	}
+	public void setCartNo(int cartNo) {
+		this.cartNo = cartNo;
+	}
+	public String getCusId() {
+		return cusId;
+	}
+	public void setCusId(String cusId) {
+		this.cusId = cusId;
+	}
 	public int getProNo() {
 		return proNo;
 	}
@@ -35,18 +49,6 @@ public class Product {
 	public void setProSpec(String proSpec) {
 		this.proSpec = proSpec;
 	}
-	public String getProPic() {
-		return proPic;
-	}
-	public void setProPic(String proPic) {
-		this.proPic = proPic;
-	}
-	public String getProPic2() {
-		return proPic2;
-	}
-	public void setProPic2(String proPic2) {
-		this.proPic2 = proPic2;
-	}	
 	public int getOriPrice() {
 		return oriPrice;
 	}
@@ -60,10 +62,22 @@ public class Product {
 		this.discountRate = discountRate;
 	}
 	public int getProPrice() {
-		return (int) (this.oriPrice * 0.01 * ((100 - this.discountRate)));
+		return (int) (this.oriPrice * (1 - this.discountRate));
 	}
 	public void setProPrice() {
-		this.proPrice = (int) (this.oriPrice * 0.01 * (100 - this.discountRate));
+		this.proPrice = (int) (this.oriPrice * (1 - this.discountRate));
+	}
+	public String getProPic() {
+		return proPic;
+	}
+	public void setProPic(String proPic) {
+		this.proPic = proPic;
+	}
+	public String getProPic2() {
+		return proPic2;
+	}
+	public void setProPic2(String proPic2) {
+		this.proPic2 = proPic2;
 	}
 	public int getAmount() {
 		return amount;

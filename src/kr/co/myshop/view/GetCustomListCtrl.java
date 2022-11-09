@@ -1,66 +1,67 @@
 package kr.co.myshop.view;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.RequestDispatcher;
-import java.util.List;
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
 import java.sql.Connection;
-import javax.servlet.ServletResponse;
-import javax.servlet.ServletRequest;
-import kr.co.myshop.vo.Custom;
-import java.util.ArrayList;
 import java.sql.DriverManager;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletRequest;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@WebServlet({ "/GetCustomListCtrl" })
-public class GetCustomListCtrl extends HttpServlet
-{
-    private static final long serialVersionUID = 1L;
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/myshop1?serverTimezone=Asia/Seoul";
-    private static final String USER = "root";
-    private static final String PASS = "a1234";
-    String sql;
-    
-    public GetCustomListCtrl() {
-        this.sql = "";
-    }
-    
-    protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            this.sql = "select * from custom order by regdate desc";
-            final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/myshop1?serverTimezone=Asia/Seoul", "root", "a1234");
-            final PreparedStatement pstmt = con.prepareStatement(this.sql);
-            final ResultSet rs = pstmt.executeQuery();
-            final List<Custom> cusList = new ArrayList<Custom>();
-            while (rs.next()) {
-                final Custom vo = new Custom();
-                vo.setCusId(rs.getString("cusid"));
-                vo.setCusPw(rs.getString("cuspw"));
-                vo.setCusName(rs.getString("cusname"));
-                vo.setAddress(rs.getString("address"));
-                vo.setTel(rs.getString("tel"));
-                vo.setRegDate(rs.getString("regdate"));
-                vo.setPoint(rs.getInt("point"));
-                vo.setLevel(rs.getInt("level"));
-                vo.setVisited(rs.getInt("visited"));
-                cusList.add(vo);
-            }
-            request.setAttribute("cusList", (Object)cusList);
-            final RequestDispatcher view = request.getRequestDispatcher("./admin/customList.jsp");
-            view.forward((ServletRequest)request, (ServletResponse)response);
-            rs.close();
-            pstmt.close();
-            con.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+import kr.co.myshop.vo.Custom;
+import kr.co.myshop.vo.Notice;
+
+@WebServlet("/GetCustomListCtrl")
+public class GetCustomListCtrl extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private final static String URL = "jdbc:mysql://localhost:3306/myshop1?serverTimezone=Asia/Seoul";
+	private final static String USER = "root";
+	private final static String PASS = "a1234";
+	String sql = "";
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//데이터베이스 연결
+			Class.forName(DRIVER);
+			sql = "select * from custom order by regdate desc";
+			Connection con = DriverManager.getConnection(URL, USER, PASS);
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			//결과를 데이터베이스로 부터 받아서 리스트로 저장
+			List<Custom> cusList = new ArrayList<Custom>();
+			while(rs.next()){
+				Custom vo = new Custom();
+				vo.setCusId(rs.getString("cusid"));
+				vo.setCusPw(rs.getString("cuspw"));
+				vo.setCusName(rs.getString("cusname"));
+				vo.setAddress(rs.getString("address"));
+				vo.setTel(rs.getString("tel"));
+				vo.setRegDate(rs.getString("regdate"));
+				vo.setPoint(rs.getInt("point"));
+				vo.setLevel(rs.getInt("level"));
+				vo.setVisited(rs.getInt("visited"));
+				cusList.add(vo);
+			}
+			request.setAttribute("cusList", cusList);
+			
+			//notice/boardList.jsp 에 포워딩
+			RequestDispatcher view = request.getRequestDispatcher("./admin/customList.jsp");
+			view.forward(request, response);
+			
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
 }

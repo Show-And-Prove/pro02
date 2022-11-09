@@ -1,26 +1,17 @@
 package kr.co.myshop.vo;
-
+//공지사항 클래스
 public class Notice {
-	
-	private int no;		//공지 번호
-	private String title;		//제목
-	private String content;		//내용
-	private String author;		//작성자
-	private String resDate;		//작성일
-	private int visited;
-	
-	
-	public int getVisited() {
-		return visited;
+	private int notiNo;
+	private String title;
+	private String content;
+	private String author;
+	private String resDate;
+	private int visited; 
+	public int getNotiNo() {
+		return notiNo;
 	}
-	public void setVisited(int visited) {
-		this.visited = visited;
-	}
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setNotiNo(int notiNo) {
+		this.notiNo = notiNo;
 	}
 	public String getTitle() {
 		return title;
@@ -46,6 +37,10 @@ public class Notice {
 	public void setResDate(String resDate) {
 		this.resDate = resDate;
 	}
-	
-	
+	public int getVisited() {
+		return visited;
+	}
+	public void setVisited(int visited) {
+		this.visited = visited;
+	}
 }

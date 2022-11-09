@@ -16,6 +16,7 @@ create table custom(
 	visited int default 0
 );
 
+select * from custom;
 
 -- 장바구니
 create table cart(
@@ -24,15 +25,19 @@ create table cart(
     cusId varchar(20)
 );
 
-    
+
 create table notice(
-	no int primary key auto_increment,
+	notiNo int primary key auto_increment,
     title varchar(100) not null,
     content varchar(600),
     author varchar(20) not null,
     resdate datetime default now());
+commit;
 
-alter table notice add column(visited int default 0);
+alter table notice add column visited int default 0;
+    
+select * from notice;
+
     
 commit;
 insert into notice(title,content,author) values ("테스트제목1","테스트내용1","admin");
@@ -53,14 +58,16 @@ create table category(
 );
 
 -- 카테고리 데이터 등록
-insert into category(cateName) values ("CATE1");
-insert into category(cateName) values ("CATE2");
-insert into category(cateName) values ("CATE3");
-insert into category(cateName) values ("CATE4");
-insert into category(cateName) values ("CATE5");
-insert into category(cateName) values ("CATE6");
+insert into category(cateName) values ("best");
+insert into category(cateName) values ("weeklybest");
+insert into category(cateName) values ("teafood");
+insert into category(cateName) values ("lifestyle");
 
 commit;
+
+select * from category;
+
+drop table category;
 
 create table product(
 	proNo int primary key auto_increment,
@@ -73,9 +80,24 @@ create table product(
 	proPic2 varchar(200)
 );
 
-insert into product(cateNo, proName, oriPrice, discountRate) values(1, "그린티 시트 마스크",8000,0);
+select * from product;
+
+alter table product add column scnt int default 0; 
+alter table product add column regdate datetime default now();
+
+commit;
+
+
+
+
+
+
+
+
+insert into product(cateNo, proName, proSpec, oriPrice, discountRate) values();
 
 select * from product;
+select * from product where prono=1;
 
 commit;
 
@@ -91,7 +113,7 @@ create table wearing(
 -- 판매 테이블 생성
 create table sales(
 	saleNo int primary key auto_increment,
-    cusId varchar(13) not null,
+    cusId varchar(20) not null,
     proNo int not null,
     amount int not null,
     saleDate datetime default now(),
@@ -99,6 +121,8 @@ create table sales(
     salePayNo int
 );
 
+
+commit;
 select * from sales;
 
 -- 결제 테이블 생성
@@ -124,6 +148,15 @@ select * from parsel;
 
 
 commit;
+
+create table cart(
+	cartNo int primary key auto_increment,
+    proNo int,
+    cusId varchar(13)
+);
+
+
+select * from cart;
 
 
     

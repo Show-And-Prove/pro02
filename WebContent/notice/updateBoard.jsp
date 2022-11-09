@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" type="text/css">
 
     <link rel="stylesheet" href="../common.css">
+
 <style>
 .title { padding-top:36px; padding-bottom:20px; }
 </style>
@@ -57,31 +58,44 @@
 <%
 	Notice vo = (Notice) request.getAttribute("notice");
 %>
-<div class="content container" id="content">
-	<h2 class="title">작성</h2>
-	<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/InsertBoardProCtrl" method="post">
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>제목</th>
-				<td><input type="text" name="title" id="title" class="form-control" required></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td><textarea cols="100" rows="8" name="content" class="form-control"  id="content"></textarea></td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="author" id="author" value="admin" class="form-control"  readonly="readonly"></td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="btn-group">
-		<input type="submit" class="btn btn-dark" value="작성">
-		<input type="reset" class="btn btn-dark" value="취소">
-		<a href="<%=request.getContextPath() %>/GetBoardListCtrl" class="btn btn-dark">목록으로</a>
-	</div>
-	</form>
+<div class="container-fluid" id="content">
+	<div class="row" id="content_row">
+		<% if(sid!=null && sid.equals("admin")) { %>
+		<%@ include file="../admin/admin_sidebar.jsp" %>
+		<% } %>
+		<% if(sid!=null && sid.equals("admin")) { %>
+		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+		<% } else { %>
+		<main class="content container">
+		<% } %>
+			<h2 class="title">공지사항 수정</h2>
+			<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/UpdateBoardProCtrl" method="post">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th>제목</th>
+							<td><input type="text" name="title" id="title" placeholder="제목 입력" class="form-control" value="<%=vo.getTitle() %>" autofocus required />
+								<input type="hidden" name="notiNo" id="notiNo" value="<%=vo.getNotiNo() %>" required/>
+							</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td><textarea cols="80" rows="6" name="content" id="content" class="form-control" required><%=vo.getContent() %></textarea></td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td><input type="text" name="author" id="author" value="admin" class="form-control" readonly></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="btn-group">
+					<input type="submit" name="submit-btn" class="btn btn-dark" value="글 수정">
+					<input type="reset" name="reset-btn" class="btn btn-dark" value="취소">
+					<a href="<%=request.getContextPath() %>/GetBoardListCtrl" class="btn btn-dark">목록으로</a>
+				</div>
+			</form>
+		</main>
+	</div>		
 </div>
 <%@ include file="../footer.jsp" %>
 <!-- Js Plugins -->
@@ -96,4 +110,4 @@
     <script src="<%=request.getContextPath() %>/js/owl.carousel.min.js"></script>
     <script src="<%=request.getContextPath() %>/js/main.js"></script>
 </body>
-</html>
+</html> 

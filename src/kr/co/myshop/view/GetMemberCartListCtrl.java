@@ -14,12 +14,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import kr.co.myshop.vo.Notice;
-import kr.co.myshop.vo.Product;
+import kr.co.myshop.vo.CartListVO;
 
-@WebServlet("/GetProductItemListCtrl")
-public class GetProductItemListCtrl extends HttpServlet {
+@WebServlet("/GetMemberCartListCtrl")
+public class GetMemberCartListCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private final static String URL = "jdbc:mysql://localhost:3306/myshop1?serverTimezone=Asia/Seoul";
@@ -27,35 +27,37 @@ public class GetProductItemListCtrl extends HttpServlet {
 	private final static String PASS = "a1234";
 	String sql = "";
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cateNo = Integer.parseInt(request.getParameter("cateNo"));
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String cusId = (String) session.getAttribute("sid");
 		try {
 			//데이터베이스 연결
 			Class.forName(DRIVER);
-			sql = "select * from product where cateno=? order by prono";
+			sql = "select a.cartno, a.prono, a.cusid, b.proname, b.cateno, b.prospec, b.oriprice, b.discountrate, b.propic, b.propic2 from cart a inner join product b on a.prono=b.prono where a.cusid=?";
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, cateNo);
+			pstmt.setString(1, cusId);
 			ResultSet rs = pstmt.executeQuery();
 			
 			//결과를 데이터베이스로 부터 받아서 리스트로 저장
-			List<Product> proList = new ArrayList<Product>();
+			List<CartListVO> cartList = new ArrayList<CartListVO>();
 			while(rs.next()){
-				Product vo = new Product();
+				CartListVO vo = new CartListVO();
+				vo.setCartNo(rs.getInt("cartno"));
 				vo.setProNo(rs.getInt("prono"));
-				vo.setCateNo(rs.getInt("cateno"));
+				vo.setCusId(rs.getString("cusid"));
 				vo.setProName(rs.getString("proname"));
 				vo.setProSpec(rs.getString("prospec"));
-				vo.setOriPrice(rs.getInt("oriprice"));
+				vo.setOriPrice(rs.getInt("oriPrice"));
 				vo.setDiscountRate(rs.getDouble("discountrate"));
 				vo.setProPic(rs.getString("propic"));
-				vo.setProPic(rs.getString("propic2"));
-				proList.add(vo);
+				vo.setProPic2(rs.getString("propic2"));
+				cartList.add(vo);
 			}
-			request.setAttribute("proList", proList);
+			request.setAttribute("cartList", cartList);
 			
-			//notice/boardList.jsp 에 포워딩
-			RequestDispatcher view = request.getRequestDispatcher("./product/productList.jsp");
+			//cart/cartList.jsp 에 포워딩
+			RequestDispatcher view = request.getRequestDispatcher("./cart/cartList.jsp");
 			view.forward(request, response);
 			
 			rs.close();

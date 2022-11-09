@@ -44,7 +44,7 @@ public class BoardListCtrl extends HttpServlet {
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				Notice vo = new Notice();
-				vo.setNo(rs.getInt("no"));
+				vo.setNotiNo(rs.getInt("notiNo"));
 				vo.setTitle(rs.getString("title"));
 				vo.setContent(rs.getString("content"));
 				vo.setAuthor(rs.getString("author"));

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/*import kr.co.myshop.app.D;*/
 import kr.co.myshop.vo.Notice;
 
 @WebServlet("/GetBoardListCtrl")
@@ -30,23 +31,23 @@ public class GetBoardListCtrl extends HttpServlet {
 		try {
 			//데이터베이스 연결
 			Class.forName(DRIVER);
-			sql = "select * from notice order by no desc";	//sql 실행
+			sql = "select * from notice order by notino desc";
 			Connection con = DriverManager.getConnection(URL, USER, PASS);
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
-			//DB에서 받아온 데이터로 리스트 생성
+			//결과를 데이터베이스로 부터 받아서 리스트로 저장
 			List<Notice> notiList = new ArrayList<Notice>();
 			while(rs.next()){
 				Notice vo = new Notice();
-				vo.setNo(rs.getInt("no"));
+				vo.setNotiNo(rs.getInt("notino"));
 				vo.setTitle(rs.getString("title"));
 				vo.setContent(rs.getString("content"));
 				vo.setAuthor(rs.getString("author"));
-				vo.setResDate(rs.getString("resDate"));
-				notiList.add(vo);	//객체의 속성에 담기
+				vo.setResDate(rs.getString("resdate"));
+				notiList.add(vo);
 			}
-			request.setAttribute("notiList", notiList);	//리스트에 추가
+			request.setAttribute("notiList", notiList);
 			
 			//notice/boardList.jsp 에 포워딩
 			RequestDispatcher view = request.getRequestDispatcher("./notice/boardList.jsp");
