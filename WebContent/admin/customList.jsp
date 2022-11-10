@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*, java.util.*, kr.co.myshop.vo.*"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,18 +18,6 @@
     <meta name="description" content="오설록, 차와 제주가 선사하는 가치 있는 쉼" />
     <meta name="facebook-domain-verification" content="tdpu6fl67o5tlqp8etjrivmd5csnrk" />
     <title>오설록, 차와 제주가 선사하는 가치 있는 쉼 | 오설록</title>
-    <link rel="stylesheet" href="common.css">
-
-    <style>
-        .title {
-            padding-top: 36px;
-            padding-bottom: 20px;
-        }
-
-        #content_row {
-            min-height: calc(100vh - 84px);
-        }
-    </style>
     <!--메타포-->
     <meta property="og:title" content="오설록">
     <meta property="og:image" content="https://www.osulloc.com/kr/ko/static/images/OGImage.jpg">
@@ -54,87 +39,68 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" type="text/css">
-</head>
 
+<style>
+.title { padding-top:36px; padding-bottom:20px; }
+#content_row { min-height:calc(100vh - 84px); }
+</style>
+</head>
 <body>
 <%
 	List<Custom> cusList = (ArrayList<Custom>) request.getAttribute("cusList");
-%>    
-	<%@ include file="../header_admin.jsp" %>
-    <!-- Header Section End -->
-
-    <body>
-        <div class="container-fluid" id="content">
-            <div class="row" id="content_row">
-                <!-- admin_sidebar 영역 입니다. -->
-                <%@ include file="admin_sidebar.jsp" %>
-                <!-- 여기까지 admin_sidebar 영역입니다. -->
-
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                    <h2 class="title">회원 목록</h2>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>연번</th>
-                                <th>아이디</th>
-                                <th>이름</th>
-                                <th>가입일</th>
-                                <th>회원등급</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(int i=0;i<cusList.size();i++){ Custom vo=cusList.get(i); %>
-                                <tr>
-                                    <td>
-                                        <%=cusList.size()-i %>
-                                    </td>
-                                    <td>
-                                    <a href="<%=request.getContextPath() %>/GetCustomDetailCtrl?cusId=<%=vo.getCusId() %>"><%=vo.getCusId() %></a>
-                                    </td>
-                                    <td>
-                                        <%=vo.getCusName() %>
-                                    </td>
-                                    <td>
-                                        <%=vo.getRegDate() %>
-                                    </td>
-                                    <td>
-                                        <% if(vo.getLevel()==0) { out.println("<span>준회원</span>");
-                                            } else if(vo.getLevel()==1){
-                                            out.println("<span>정회원</span>");
-                                            } else if(vo.getLevel()==2){
-                                            out.println("<span>우수회원</span>");
-                                            } else if(vo.getLevel()==3){
-                                            out.println("<span>VIP회원</span>");
-                                            } else {
-                                            out.println("<span>관리자</span>");
-                                            }
-                                            %>
-                                    </td>
-                                </tr>
-                                <% } %>
-                        </tbody>
-                    </table>
-                </main>
-            </div>
-        </div>
-
-
-
-        <!-- Footer Section Begin -->
-		<%@ include file="../footer.jsp" %>
-        <!-- Footer Section End -->
-
-        <!-- Js Plugins -->
-        <script src="<%=request.getContextPath() %>/js/jquery-3.3.1.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/jquery.nice-select.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/jquery.nicescroll.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/jquery.magnific-popup.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/jquery.countdown.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/jquery.slicknav.js"></script>
-        <script src="<%=request.getContextPath() %>/js/mixitup.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/owl.carousel.min.js"></script>
-        <script src="<%=request.getContextPath() %>/js/main.js"></script>
-    </body>
-
+%>
+<%@ include file="../header.jsp" %>
+<div class="container-fluid" id="content">
+<div class="row" id="content_row">
+    <%@ include file="admin_sidebar.jsp" %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+		<h2 class="title">공지사항 목록</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>연번</th><th>아이디</th><th>이름</th><th>가입일</th><th>회원등급</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% for(int i=0;i<cusList.size();i++){
+				Custom vo = cusList.get(i);
+			%>
+			<tr>
+				<td><%=cusList.size()-i %></td>
+				<td><a href="<%=request.getContextPath() %>/GetCustomDetailCtrl?cusId=<%=vo.getCusId() %>"><%=vo.getCusId() %></a></td>
+				<td><%=vo.getCusName() %></td>
+				<td><%=vo.getRegDate() %></td>
+				<td><%
+				if(vo.getLevel()==0) {
+					out.println("<span>준회원</span>");
+				} else if(vo.getLevel()==1){
+					out.println("<span>정회원</span>");
+				} else if(vo.getLevel()==2){
+					out.println("<span>우수회원</span>");
+				} else if(vo.getLevel()==3){
+					out.println("<span>VIP회원</span>");
+				} else {
+					out.println("<span>관리자</span>");
+				}
+				%></td>
+			</tr>
+			<% } %>	
+			</tbody>
+		</table>
+    </main>
+  </div>
+</div>
+<%@ include file="../footer.jsp" %>
+<!-- Js Plugins -->
+    <script src="<%=request.getContextPath() %>/js/jquery-3.3.1.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery.nice-select.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery.nicescroll.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery.magnific-popup.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery.countdown.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/jquery.slicknav.js"></script>
+    <script src="<%=request.getContextPath() %>/js/mixitup.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/owl.carousel.min.js"></script>
+    <script src="<%=request.getContextPath() %>/js/main.js"></script>
+</body>
 </html>

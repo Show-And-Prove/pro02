@@ -18,6 +18,12 @@
     <meta name="description" content="오설록, 차와 제주가 선사하는 가치 있는 쉼" />
     <meta name="facebook-domain-verification" content="tdpu6fl67o5tlqp8etjrivmd5csnrk" />
     <title>오설록, 차와 제주가 선사하는 가치 있는 쉼 | 오설록</title>
+    <style>
+        .title {
+            padding-top: 36px;
+            padding-bottom: 20px;
+        }
+    </style>
     <!--메타포-->
     <meta property="og:title" content="오설록">
     <meta property="og:image" content="https://www.osulloc.com/kr/ko/static/images/OGImage.jpg">
@@ -31,6 +37,7 @@
         rel="stylesheet">
 
     <!-- Css Styles -->
+    <!-- 절대경로로 설정해야 ctrl을 거치고 나서 정상출력 -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/elegant-icons.css" type="text/css">
@@ -39,7 +46,9 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" type="text/css">
-<link rel="stylesheet" href="common.css">
+
+    <link rel="stylesheet" href="../common.css">
+
 
 <style>
 .title { padding-top:36px; padding-bottom:20px; }
@@ -47,9 +56,6 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<%
-	Sales vo = (Sales) request.getAttribute("sales");
-%>
 <div class="container-fluid" id="content">
 	<div class="row" id="content_row">
 		<% if(sid!=null && sid.equals("admin")) { %>
@@ -60,58 +66,45 @@
 		<% } else { %>
 		<main class="content container">
 		<% } %>
-			<h2 class="title">구매 상세 내역</h2>
-			<table class="table">
-				<tbody>
-					<tr>
-						<th>구매 번호</th>
-						<td><%=vo.getSaleNo() %></td>
-					</tr>
-					<tr>
-						<th>구매 제품 번호</th>
-						<td><%=vo.getProNo() %></td>
-					</tr>
-					<tr>
-						<th>구매 수량</th>
-						<td><%=vo.getAmount() %></td>
-					</tr>
-					<tr>
-						<th>구매일</th>
-						<td><%=vo.getSaleDate() %></td>
-					</tr>
-					<tr>
-						<th>배송번호</th>
-						<td><%=vo.getParselNo() %></td>
-					</tr>
-					<tr>
-						<th>결제번호</th>
-						<td><%=vo.getProNo() %></td>
-					</tr>
-					<tr>
-						<th>배송상태</th>
-						<td>
-							<% if(vo.getParselState()==0) { %>
-							<span>배송전</span>
-							<% } else if(vo.getParselState()==1) { %>
-							<span>배송중</span>
-							<% } else if(vo.getParselState()==2) { %>
-							<span>도착</span>
-							<% } else if(vo.getParselState()==3) { %>
-							<span>구매결정 완료</span>
-							<% } %>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="btn-group">
-				<a href="<%=request.getContextPath() %>/GetMemberSalesInfoCtrl" class="btn btn-danger">목록으로</a>
-				<% if(vo.getParselState()==0) { %>
-				<a href="<%=request.getContextPath() %>/DeleteSalesCtrl?saleNo=<%=vo.getSaleNo() %>" class="btn btn-primary">직권 결제 취소</a>
-				<% } %>
-				<a href="<%=request.getContextPath() %>/UpdateParselCtrl?parselNo=<%=vo.getParselNo() %>" class="btn btn-info">배송 정보 등록 및 수정</a>
-			</div>
+			<h2 class="title">질문 등록</h2>
+			<form name="frm1" id="frm1" action="<%=request.getContextPath() %>/InsertQnaProCtrl.do" method="post">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th><label for="title">질문 제목</label></th>
+							<td><input type="text" name="title" id="title" placeholder="제목 입력" maxlength="100" class="form-control" required></td>
+						</tr>
+						<tr>
+							<th><label for="content">질문 내용</label></th>
+							<td>
+								<textarea cols="100" rows="6" name="content" id="content" maxlength="600" class="form-control"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th><label for="author">작성자</label></th>
+							<td>
+								<input type="text" name="author" id="author" class="form-control" value='<%=sid %>' readonly required>
+								<input type="hidden" name="lev" id="lev" value="0">
+							</td>
+						</tr>
+						<tr>
+							<th><label for="sec1">비밀글 여부</label></th>
+							<td>
+								<input type="radio" name="sec" id="sec1" value="N" checked>
+								<label for="">공개</label>
+								<input type="radio" name="sec" id="sec2" value="Y">
+								<label for="">비밀글</label>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="btn-group">
+					<button type="submit" class="btn btn-primary">글 쓰기</button>
+					<a href="<%=request.getContextPath() %>/GetQnaListCtrl.do" class="btn btn-info">목록으로</a>
+				</div>
+			</form>
 		</main>
-	</main>		
+	</div>
 </div>
 <%@ include file="../footer.jsp" %>
 <!-- Js Plugins -->

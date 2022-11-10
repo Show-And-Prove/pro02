@@ -1,9 +1,9 @@
 create database myshop1;
 commit;
 
-
 use myshop1;
 
+-- 회원 목록 cusId varchar(20) 외래키
 create table custom(
 	cusId varchar(20) primary key,	
 	cusPw varchar(200) not null,
@@ -26,6 +26,7 @@ create table cart(
 );
 
 
+-- 공지사항 author custom(cusId)
 create table notice(
 	notiNo int primary key auto_increment,
     title varchar(100) not null,
@@ -33,13 +34,14 @@ create table notice(
     author varchar(20) not null,
     resdate datetime default now());
 commit;
-
+-- 조회수 컬럼 추가
 alter table notice add column visited int default 0;
     
 select * from notice;
 
     
 commit;
+-- 더미데이터
 insert into notice(title,content,author) values ("테스트제목1","테스트내용1","admin");
 insert into notice(title,content,author) values ("테스트제목2","테스트내용2","admin");
 insert into notice(title,content,author) values ("테스트제목3","테스트내용3","admin");
@@ -52,6 +54,7 @@ commit;
 select * from notice;
 select * from custom;
 
+-- 상품 카테고리
 create table category(
 	cateNo int primary key auto_increment,
 	cateName varchar(50)
@@ -69,6 +72,7 @@ select * from category;
 
 drop table category;
 
+-- 상품 proPic, proPic2
 create table product(
 	proNo int primary key auto_increment,
 	cateNo int not null,
@@ -82,6 +86,7 @@ create table product(
 
 select * from product;
 
+-- ?
 alter table product add column scnt int default 0; 
 alter table product add column regdate datetime default now();
 
@@ -103,7 +108,7 @@ commit;
 
 select * from notice;
 
-
+-- 입고 
 create table wearing(
 	prono int primary key,
     amount int
@@ -149,10 +154,23 @@ select * from parsel;
 
 commit;
 
+-- 장바구니
 create table cart(
 	cartNo int primary key auto_increment,
     proNo int,
-    cusId varchar(13)
+    cusId varchar(20)
+);
+
+
+create table qnaa(
+    no int primary key auto_increment,
+    title varchar(100) not null,
+    content varchar(1000) not null,
+    author varchar(20) not null,
+    resdate datetime default now(),
+    lev int default 0,            -- 깊이
+    parno int not null,          -- 부모글 번호
+    sec char(1)                     -- 비밀글 여부
 );
 
 
