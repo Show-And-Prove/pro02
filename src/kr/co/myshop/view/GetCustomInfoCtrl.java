@@ -14,8 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import sun.rmi.server.Dispatcher;
 import kr.co.myshop.vo.Custom;
+import sun.rmi.server.Dispatcher;
+
 
 @WebServlet("/GetCustomInfoCtrl")
 public class GetCustomInfoCtrl extends HttpServlet {

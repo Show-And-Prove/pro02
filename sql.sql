@@ -176,6 +176,8 @@ create table qnaa(
 
 select * from cart;
 
+commit;
+
 
     
     
